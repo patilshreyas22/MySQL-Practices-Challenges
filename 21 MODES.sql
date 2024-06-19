@@ -1,0 +1,46 @@
+SELECT @@GLOBAL.SQL_MODE;
+SELECT @@SESSION.SQL_MODE;
+
+SELECT 3/0;
+SHOW WARNINGS;
+
+SET SESSION SQL_MODE = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION'; /* OMITTED THE MODE : ERROR_FOR_DIVISON_BY_0 */
+SHOW WARNINGS;
+
+SELECT 3/0;
+
+SHOW WARNINGS; /* NO WARNINGS NOW */
+
+/* STRICT TRANS TABLE */
+
+
+SET SESSION sql_mode = '';
+
+DESC reviews;
+
+INSERT INTO reviews (Rating) VALUES ('hi'); /* WILL DISPLAY A WARNING BUT STILL WILL INSERT 0 AS DATA INTO THE RATING ROW */
+
+SELECT * FROM REVIEWS;
+SHOW WARNINGS;
+
+DELETE FROM reviews WHERE ReviewID = 96;
+
+SET SESSION sql_mode = 'STRICT_TRANS_TABLES';
+
+SET SESSION sql_mode = 'ONLY_FULL_GROUP_BY';
+
+SELECT title ,rating FROM series
+INNER JOIN reviews ON series.SeriesID = reviews.Series_rid
+GROUP BY title;
+
+select @@global.sql_mode;
+select @@session.sql_mode;
+
+set session sql_mode = 'no_zero_in_date';
+
+SELECT DATE('2010-00-12');
+SHOW WARNINGS;
+select quit;
+
+
+
